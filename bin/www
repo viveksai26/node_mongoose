@@ -9,7 +9,7 @@ var debug = require('debug')('node-mongoose-1:server');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
-
+var privateFile = require('../private')
 /**
  * Get port from environment and store in Express.
  */
@@ -22,8 +22,10 @@ app.set('secPort', port+443);
  * Create HTTP server.
  */
 
+var private = process.env.PRIVATE_KEY || privateFile;
+
 var options = {
-  key : fs.readFileSync(__dirname + '/private.key'),
+  key : private,
   cert: fs.readFileSync(__dirname + '/certificate.pem')
 }
 
