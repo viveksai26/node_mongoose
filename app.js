@@ -22,7 +22,7 @@ app.use(passport.initialize());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+const uploadRouter = require('./routes/uploadRouter');
 var dishRouter = require("./routes/dishRouter");
 var promoRouter = require("./routes/promoRouter");
 var leaderRouter = require("./routes/leaderRouter");
@@ -34,5 +34,6 @@ app.use("/user", userRouter);
 app.use("/dishes", dishRouter);
 app.use("/promotions", promoRouter);
 app.use("/leaders", leaderRouter);
+app.use('/imageUpload',uploadRouter);
 
 module.exports = app;
