@@ -5,9 +5,10 @@ var User = require('./models/users');
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-
-var config = require('./configuration.js');
-
+var config = {};
+if (process.env.NODE_ENV !== 'PRODUCTION') {
+    var config = require('./configuration.js');
+}
 
 exports.getToken = function(user) {
     return jwt.sign(user, process.env.SECRET_KEY || config.secretKey,
