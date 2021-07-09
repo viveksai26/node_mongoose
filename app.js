@@ -28,12 +28,14 @@ var promoRouter = require("./routes/promoRouter");
 var leaderRouter = require("./routes/leaderRouter");
 var userRouter = require("./routes/userRouter");
 var indexRouter = require("./routes/index");
+var favoriteRouter = require("./routes/favoriteRouter");
 
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/dishes", dishRouter);
 app.use("/promotions", promoRouter);
 app.use("/leaders", leaderRouter);
+app.use("/favorite", favoriteRouter);
 app.use('/imageUpload',uploadRouter);
 
 module.exports = app;
