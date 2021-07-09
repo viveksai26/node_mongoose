@@ -22,7 +22,8 @@ app.use(passport.initialize());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const uploadRouter = require('./routes/uploadRouter');
+
+var uploadRouter = require('./routes/uploadRouter');
 var dishRouter = require("./routes/dishRouter");
 var promoRouter = require("./routes/promoRouter");
 var leaderRouter = require("./routes/leaderRouter");
