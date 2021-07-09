@@ -6,17 +6,17 @@ var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-var config = require('./config.js');
+var config = require('./configuration.js');
 
 
 exports.getToken = function(user) {
-    return jwt.sign(user, config.secretKey,
+    return jwt.sign(user, process.env.SECRET_KEY || config.secretKey,
         {expiresIn: 3600});
 };
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = config.secretKey;
+opts.secretOrKey = process.env.SECRET_KEY || config.secretKey;
 
 
 exports.jwtPassport = passport.use(new JwtStrategy(opts,
@@ -37,6 +37,7 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 
 exports.verifyUser = passport.authenticate('jwt', {session: false});
 exports.verifyAdmin = (req, res, next) => {
+    console.log(req.user);
     if (req.user.admin) {
         next();
     } else {
