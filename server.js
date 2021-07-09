@@ -7,30 +7,30 @@
  var app = require('./app');
  var debug = require('debug')('node-mongoose-1:server');
  var http = require('http');
- var https = require('https');
- var fs = require('fs');
- var privateFile = require('./private')
+//  var https = require('https');
+//  var fs = require('fs');
+//  var privateFile = require('./private')
  /**
   * Get port from environment and store in Express.
   */
  
  var port = normalizePort(process.env.PORT || '3000');
  app.set('port', port);
- app.set('secPort', port+443);
+//  app.set('secPort', port+443);
  
  /**
   * Create HTTP server.
   */
  
- var private = process.env.PRIVATE_KEY || privateFile;
+//  var private = process.env.PRIVATE_KEY || privateFile;
  
- var options = {
-   key : private,
-   cert: fs.readFileSync(__dirname + '/bin/certificate.pem')
- }
+//  var options = {
+//    key : private,
+//    cert: fs.readFileSync(__dirname + '/bin/certificate.pem')
+//  }
  
  var server = http.createServer(app);
- var secureServer = https.createServer(options, app);
+//  var secureServer = https.createServer(options, app);
  
  /**
   * Listen on provided port, on all network interfaces.
@@ -40,11 +40,11 @@
  server.on('error', onError);
  server.on('listening', onListening);
  
- secureServer.listen(app.get('secPort'), () => {
-   console.log('Server listening on port ',app.get('secPort'));
- });
- secureServer.on('error', onError);
- secureServer.on('listening', onListening);
+//  secureServer.listen(app.get('secPort'), () => {
+//    console.log('Server listening on port ',app.get('secPort'));
+//  });
+//  secureServer.on('error', onError);
+//  secureServer.on('listening', onListening);
  
  /**
   * Normalize a port into a number, string, or false.
@@ -99,7 +99,7 @@
   */
  
  function onListening() {
-   var addr = secureServer.address();
+   var addr = server.address();
    var bind = typeof addr === 'string'
      ? 'pipe ' + addr
      : 'port ' + addr.port;
