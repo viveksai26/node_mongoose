@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const authenticate = require('../authenticate');
 const multer = require('multer');
-
+const files = require('../public/images');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/images');
@@ -34,6 +34,8 @@ uploadRouter.route('/')
     res.end('GET operation not supported on /imageUpload');
 })
 .post(authenticate.verifyUser, authenticate.verifyAdmin, upload.single('imageFile'), (req, res) => {
+    console.log(req.file);
+    console.log(files);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(req.file);
