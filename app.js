@@ -2,7 +2,7 @@ var express = require("express");
 var path = require("path");
 var logger = require("morgan");
 const mongoose = require("mongoose");
-var config = require('./configuration.js');
+var config = require('./configuration.js') || {};
 const url = process.env.MONGODB_URL || config.mongodb_cloud;
 const connect = mongoose.connect(url, {
   useNewUrlParser: true,
